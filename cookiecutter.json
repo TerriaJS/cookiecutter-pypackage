@@ -1,12 +1,12 @@
 {
-	"full_name": "NICTA Spatial Inference Systems Team",
-	"email": "louis.tiao@nicta.com.au",
-	"github_username": "NICTA",
+	"full_name": "Spatial Inference Systems Team",
+	"email": "louis.tiao@data61.csiro.au",
+	"github_username": "TerriaML",
 	"project_name": "A Lot of Effort",
 	"repo_name": "alotofeffort",
 	"project_short_description": "A Python Package",
-	"release_date": "2013-07-10",
-	"year": "2013",
+	"release_date": "2016-07-10",
+	"year": "2016",
 	"version": "0.1.0",
 	"use_eigen": ["yes", "no"]
 }

@@ -10,14 +10,14 @@ package. Based on `Nekroze/cookiecutter-pypackage`_
 * Travis-CI_: Ready for Travis Continuous integration testing
 * Tox_ testing: Setup to easily test for python 2.6, 2.7, 3.3 and PyPy_
 * Sphinx_ docs: Documentation ready for generation with ReadTheDocs_, `Github Pages`_
-* Wheel_ support: Use the newest Oython package distribution standard from the get-go
+* Wheel_ support: Use the newest Python package distribution standard from the get-go
 
 Usage
 -----
 
 Generate a Python package project::
 
-    $ cookiecutter https://github.com/TerriaJS/cookiecutter-pypackage
+    $ cookiecutter https://github.com/TerriaML/cookiecutter-pypackage
 
 * Initialize repo and push to Github.
 * Add the repo to your Travis CI account.
@@ -25,6 +25,7 @@ Generate a Python package project::
 * (For Github Pages) Run `make ghp`.
 * Run `tox` to make sure all tests pass.
 * Release your package the standard Python way.
+* If you choose to use Eigen, the extension modules will be built when the package is installed. The extension module will be available under `{{ cookiecutter.repo_name }}.ext`.
 
 .. _Travis-CI: http://travis-ci.org/
 .. _Tox: http://testrun.org/tox/

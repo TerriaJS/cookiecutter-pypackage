@@ -29,7 +29,7 @@ doclink = """
 Documentation
 -------------
 
-The full documentation is at http://nicta.github.io/{{ cookiecutter.repo_name }}/."""
+The full documentation is at http://terriaml.github.io/{{ cookiecutter.repo_name }}/."""
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 class get_pybind_include(object):
