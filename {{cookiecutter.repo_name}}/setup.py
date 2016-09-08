@@ -54,7 +54,6 @@ def find_eigen(hint=None):
     # List the standard locations including a user supplied hint.
     search_dirs = [] if hint is None else hint
     search_dirs += [
-        "../eigen3", # Prioritise the local version
         "/usr/local/include/eigen3",
         "/usr/local/homebrew/include/eigen3",
         "/opt/local/var/macports/software/eigen3",
