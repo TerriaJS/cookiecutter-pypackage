@@ -70,11 +70,9 @@ local development.
 Now you can make your changes locally.
 
 4. When you're done making changes, check that your changes pass style and unit
-   tests, including testing other Python versions with tox::
+   tests::
 
-    $ tox
-
-To get tox, just pip install it.
+    $ make lint && test
 
 5. Commit your changes and push your branch to GitHub::
 
@@ -97,8 +95,7 @@ Before you submit a pull request, check that it meets these guidelines:
    feature to the list in README.rst.
 3. The pull request should work for Python 2.6, 2.7, and 3.3, and for PyPy.
    Check https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }} 
-   under pull requests for active pull requests or run the ``tox`` command and
-   make sure that the tests pass for all supported Python versions.
+   under pull requests for active pull requests.
 
 
 Tips

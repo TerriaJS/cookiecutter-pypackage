@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages, Extension
+from setuptools import setup, find_packages, Extension, distutils
 from setuptools.command.test import test as TestCommand
 from setuptools.command.build_ext import build_ext as BuildExtCommand
 import sys, os, re
@@ -109,7 +109,7 @@ def has_flag(compiler, flagname):
         f.write('int main (int argc, char **argv) { return 0; }')
         try:
             compiler.compile([f.name], extra_postargs=[flagname])
-        except setuptools.distutils.errors.CompileError:
+        except distutils.errors.CompileError:
             return False
     return True
 
@@ -189,7 +189,6 @@ setup(
             'pytest-cov',
             'coverage',
             'codecov',
-            'tox',
             'flake8'
         ]
     },
