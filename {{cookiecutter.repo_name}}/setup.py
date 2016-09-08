@@ -32,6 +32,7 @@ Documentation
 The full documentation is at http://terriaml.github.io/{{ cookiecutter.repo_name }}/."""
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
+{% if cookiecutter.use_eigen == "yes" %}
 class get_pybind_include(object):
     """Helper class to determine the pybind11 include path
     The purpose of this class is to postpone importing pybind11
@@ -84,7 +85,6 @@ def find_eigen(hint=None):
     return None
 
 ext_modules = [
-    {% if cookiecutter.use_eigen == "yes" %}
     Extension(
         '{{ cookiecutter.repo_name }}.ext',
         ['{{ cookiecutter.repo_name }}/src/main.cpp'],
@@ -96,7 +96,6 @@ ext_modules = [
         ],
         language='c++'
     ),
-    {% endif %}
 ]
 
 # As of Python 3.6, CCompiler has a `has_flag` method.
@@ -151,6 +150,7 @@ class BuildExt(BuildExtCommand):
         for ext in self.extensions:
             ext.extra_compile_args = opts
         BuildExtCommand.build_extensions(self)
+{% endif %}
 
 setup(
     name='{{ cookiecutter.repo_name }}',
@@ -163,7 +163,7 @@ setup(
     packages=find_packages(),
     package_dir={'{{ cookiecutter.repo_name }}': '{{ cookiecutter.repo_name }}'},
     include_package_data=True,
-    ext_modules=ext_modules,
+    {% if cookiecutter.use_eigen == "yes" %}ext_modules=ext_modules,{% endif %}
     entry_points={
         'console_scripts': [
             '{{ cookiecutter.repo_name }}_cli_script = {{ cookiecutter.repo_name }}.scripts.cli_script:cli'
@@ -173,36 +173,30 @@ setup(
         ]
     },
     install_requires=[
+        'click',
+        'matplotlib',
         'scipy',
         'numpy',
         'pycontracts',
-        {% if cookiecutter.use_eigen == "yes" %}
-        'pybind11'
-        {% endif %}
+        {% if cookiecutter.use_eigen == "yes" %}'pybind11'{% endif %}
     ],
     extras_require={
-        'demos': [
-            'click',
-            'matplotlib'
-        ],
         'dev': [
             'sphinx',
-            'ghp-import'
+            'sphinxcontrib-programoutput',
+            'ghp-import',
+            'pytest',
+            'pytest-cov',
+            'coverage',
+            'codecov',
+            'tox',
+            'flake8'
         ]
     },
     cmdclass={
         'test': PyTest,
-        {% if cookiecutter.use_eigen == "yes" %}
-        'build_ext': BuildExt,
-        {% endif %}
+        {% if cookiecutter.use_eigen == "yes" %}'build_ext': BuildExt,{% endif %}
     },
-    tests_require=[
-        'pytest',
-        'pytest-cov',
-        'coverage',
-        'codecov',
-        'tox',
-    ],
     license="Apache Software License 2.0",
     zip_safe=False,
     keywords='{{ cookiecutter.repo_name }}',

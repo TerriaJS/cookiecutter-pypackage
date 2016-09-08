@@ -12,18 +12,11 @@ addons:
     - liblapack-dev
     - libatlas-base-dev
     - gfortran
+    - libeigen3-dev
 
-before_install:
-  - wget http://ab-initio.mit.edu/nlopt/nlopt-2.4.2.tar.gz
-  - tar -xvf nlopt-2.4.2.tar.gz
-  - cd nlopt-2.4.2
-  - PYTHON=$(which python) ./configure --prefix=$(dirname $(dirname $(which python))) --enable-shared
-  - make
-  - make install
-
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: 
-  - pip install -r requirements.txt
+# command to install dependencies
+install:
+  - pip install .[dev]
 
 # command to run tests, e.g. python setup.py test
 script:

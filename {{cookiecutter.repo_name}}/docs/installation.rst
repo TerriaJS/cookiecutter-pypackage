@@ -2,12 +2,10 @@
 Installation
 ============
 
-At the command line either via easy_install or pip::
+At the command line via pip in the project directory::
 
-    $ easy_install {{ cookiecutter.repo_name }}
-    $ pip install {{ cookiecutter.repo_name }}
+    $ pip install .
 
-Or, if you have virtualenvwrapper installed::
+To install in develop mode with packages required for development::
 
-    $ mkvirtualenv {{ cookiecutter.repo_name }}
-    $ pip install {{ cookiecutter.repo_name }}
+    $ pip install -e .[dev]
