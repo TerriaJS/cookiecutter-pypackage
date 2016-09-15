@@ -23,7 +23,7 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} +
 
 lint:
-	flake8 {{ cookiecutter.repo_name }} test
+	flake8 {{ cookiecutter.repo_name }} tests
 
 test:
 	py.test
