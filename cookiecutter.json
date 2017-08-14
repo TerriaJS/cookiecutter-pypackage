@@ -1,12 +1,12 @@
 {
-	"full_name": "Terria Machine Learning",
-	"email": "terriaml@data61.csiro.au",
-	"github_username": "TerriaML",
+	"full_name": "Determinant",
+	"email": "lachlan.mccalman@data61.csiro.au",
+	"github_username": "determinant-io",
 	"project_name": "A Lot of Effort",
 	"repo_name": "alotofeffort",
 	"project_short_description": "A Python Package",
-	"release_date": "2016-07-10",
-	"year": "2016",
+	"release_date": "2017-01-01",
+	"year": "2017",
 	"version": "0.1.0",
-	"use_eigen": ["yes", "no"]
+  "ci_docker_image": "determinant/base-arch:0.1"
 }
