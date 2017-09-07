@@ -1,14 +1,16 @@
-.PHONY: help clean clean-pyc clean-build list test test-all coverage docs release sdist
+.PHONY: help clean clean-pyc clean-build typecheck typecheck-xml lint lint-xml test test-xml
 
 help:
-	@echo "clean-build - remove build artifacts"
-	@echo "clean-pyc - remove Python file artifacts"
+	@echo "clean - clean all artefacts"
+	@echo "clean-build - remove build artefacts"
+	@echo "clean-pyc - remove Python file artefacts"
+	@echo "typecheck - check types with mypy"
+	@echo "test - run tests and check coverage"
 	@echo "lint - check style with flake8"
-	@echo "test - run tests quickly with the default Python"
-	@echo "coverage - check code coverage quickly with the default Python"
-	@echo "docs - generate Sphinx HTML documentation, including API docs"
-	@echo "release - package and upload a release"
-	@echo "sdist - package"
+	@echo "typecheck-xml - check types with mypy with xml output"
+	@echo "test-xml - run tests and check coverage with xml output"
+	@echo "lint-xml - check style with flake8 with xml output"
+
 
 clean: clean-build clean-pyc
 
@@ -22,29 +24,21 @@ clean-pyc:
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 
+typecheck:
+	mypy ./{{ cookiecutter.repo_name }}
+
+typecheck-xml:
+	mypy --junit-xml=test_output/mypy/results.xml ./{{ cookiecutter.repo_name }}
+
 lint:
-	flake8 {{ cookiecutter.repo_name }} tests
+	py.test --flake8 ./{{ cookiecutter.repo_name }} -p no:regtest --cache-clear
+
+lint-xml:
+	py.test --junit-xml=test_output/flake8/results.xml --flake8 ./{{ cookiecutter.repo_name }} -p no:regtest --cache-clear
 
 test:
-	py.test
+	py.test --cov=./{{ cookiecutter.repo_name }} --cache-clear --cov-fail-under=80 .
 
-coverage:
-	coverage run --source {{ cookiecutter.repo_name }} setup.py test
-	coverage report -m
-	coverage html
+test-xml:
+	py.test --junit-xml=test_output/pytest/results.xml --cov=./{{ cookiecutter.repo_name }} --cov-report=html:test_output/coverage --cache-clear --cov-fail-under=80 .
 
-docs:
-	rm -f docs/{{ cookiecutter.repo_name }}.rst
-	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ {{ cookiecutter.repo_name }}
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-
-release: clean
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
-
-sdist: clean
-	python setup.py sdist
-	python setup.py bdist_wheel upload
-	ls -l dist

@@ -1,3 +1,5 @@
-__author__ = '{{ cookiecutter.full_name }}'
-__email__ = '{{ cookiecutter.email }}'
-__version__ = '{{ cookiecutter.version }}'
+"""{{ cookiecutter.repo_name }} main package."""
+
+from .__version__ import __version__
+
+__all__ = ("__version__",)
